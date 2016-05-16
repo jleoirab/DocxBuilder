@@ -1,0 +1,3 @@
+[submodule "lib/docx4j"]
+	path = lib/docx4j
+	url = https://github.com/plutext/docx4j.git
