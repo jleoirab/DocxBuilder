@@ -27,6 +27,9 @@ public class DocxBuilder {
 	public static void main(String[] args) {
 		// TODO: Turn this into a reader/writer problem. 
 		// That's actually the whole point of all this LOL.
+		// So the final program will consist of 1 process 1 global pipe, 
+		// 1 writer process to read from the csv file and write to the global pipe, 
+		// 3 reader processes to read from the global pipe and create the docx files.
 		parser = new CSVParser(testCSV);
 		
 		try {
@@ -68,7 +71,7 @@ public class DocxBuilder {
 		String xml = XmlUtils.marshaltoString(workPackage.getMainDocumentPart().getJaxbElement(), true);
 		
 		for(String key : mapping.keySet()){
-			xml = xml.replaceAll("xxx" + key + "xxx", mapping.get(key));
+			xml = xml.replaceAll(key, mapping.get(key));
 		}
 		
 		Object obj = XmlUtils.unmarshallFromTemplate(xml, null);

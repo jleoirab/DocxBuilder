@@ -33,7 +33,7 @@ public class CSVParser {
 		for(int i = 0; i < head.length; ++i){
 			// Our hopefully very unique variable string. It would be weird to have a document
 			// with valid strings that match this.
-			String key = "xxx" + head[i].replaceAll("\\s", "") + "xxx";
+			String key = "XXX" + head[i].replaceAll("\\s", "") + "XXX";
 			
 			headMapping.put(key, i);
 		}
