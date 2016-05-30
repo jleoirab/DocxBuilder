@@ -2,27 +2,32 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
 
-
-public class CSVParser {
+public class CSVParser extends Thread {
 	private String csvFile;
+	private JobQueue queue;
 	
-	public CSVParser(String csvFile){
+	public CSVParser(JobQueue queue, String csvFile){
 		this.csvFile = csvFile;
+		this.queue = queue;
 	}
 	
-	public LinkedList<HashMap<String, String>> parse() throws Exception{
-		LinkedList<HashMap<String, String>> list = new LinkedList<>();
-		BufferedReader reader = new BufferedReader(new FileReader(this.csvFile));
-		
-		HashMap<String, Integer> headMapping = this.getTableHeadMapping(reader);
-		
-		for(String row; (row = reader.readLine()) != null;){
-			list.addLast(this.getMappingForRow(row, headMapping));
+	public void run(){
+		try {
+			System.out.println("Parser working");
+			queue.registerWriter();
+			
+			BufferedReader reader = new BufferedReader(new FileReader(this.csvFile));
+			HashMap<String, Integer> headMapping = this.getTableHeadMapping(reader);
+			
+			for(String row; (row = reader.readLine()) != null;){
+				queue.addJob(this.getMappingForRow(row, headMapping));
+			}
+			
+			queue.unregisterWriter();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		return list;
 	}
 	
 	private HashMap<String, Integer> getTableHeadMapping(BufferedReader br) throws IOException{

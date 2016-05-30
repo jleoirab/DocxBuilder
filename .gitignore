@@ -1,4 +1,6 @@
+test/[0-9]*.docx
 .classpath
 .project
 .metadata/
 .settings/
+
