@@ -12,5 +12,5 @@ Cuz I wanted to ;). No really, I just wanted to butress my understanding of the 
 Right now, there is no great way to make use of this application. (That's why it's a WIP). For now, you can import it to eclipse and run as a Java Application to see it do its work.
 
 ## Next Steps
-- Harness the powers of concurrency. See src/DocxBuilder.java for more details
-- Make the program executable on a terminal
+- [x] Harness the powers of concurrency.
+- [ ] Make the program executable on a terminal
