@@ -24,6 +24,7 @@ public class CSVParser extends Thread {
 				queue.addJob(this.getMappingForRow(row, headMapping));
 			}
 			
+			reader.close();
 			queue.unregisterWriter();
 		} catch (Exception e) {
 			e.printStackTrace();
